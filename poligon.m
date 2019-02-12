@@ -1,4 +1,4 @@
-function [ploscina] = poligon()
+function [plosc] = poligon()
 %POLIGON racuna ploscino poligona in izrise poligon
 %ploscina = POLIGON(t) vrne ploscino poligona, ko se ta prvi? zapre.
 %To se zgodi, ko se premici, ki potekajo skozi to?ke, ki jih risemo
@@ -58,9 +58,9 @@ end
     plot(x_tocke,y_tocke,'g-x');
     hold on
     grid on
-    sezTock
     plot(x_rez,y_rez,'y-*');
     fill(x_rez,y_rez,'r');
+    plosc = ploscina(rez);
     
 
 end

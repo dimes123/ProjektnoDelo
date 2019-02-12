@@ -1,2 +1,0 @@
-function rez = pla()
-end

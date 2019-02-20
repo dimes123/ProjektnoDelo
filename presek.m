@@ -19,19 +19,21 @@ for i = 1:length(sezTock(1,:))-2
     if k2 == Inf || k2 == -Inf %vemo, da gre za navpicno crto
         x = prva(1);
         y = n1-k1*x;
-        if (min(y1,y2)<y) && (y<max(y1,y2)) && x1 == x2
+        if (min(y1,y2)<y) && (y<max(y1,y2)) && (trenutna(1) <= max(x1,x2))
             tocka = [x,y]';
             indeks = i;
             stikalo = true;
+            disp('najdem presecisce x konstanta')
             break
         end
     elseif k2 == 0 %vemo, da gre za vodoravno crto
         y = n2;
         x = (y-n1)/k1;
-        if (min(x1,x2)<x) && (x<max(x1,x2)) && y1 == y2
+        if (min(x1,x2)<x) && (x<max(x1,x2)) && (trenutna(2) >= max(y1,y2))
             tocka = [x,y]';
             indeksTocke = i;
             stikalo = true;
+            disp('najdem presecisce y konstanta')
             break;
         end
     else %ce, gre za navadni dve premici
@@ -42,9 +44,11 @@ for i = 1:length(sezTock(1,:))-2
                 tocka = [x,y]';
                 indeksTocke = i;
                 stikalo = true;
+                disp('najdem presecisce premic')
             	break;
             end
         end
     end
 end
+disp('nisem nasel presecisca')
 end

@@ -19,36 +19,47 @@ for i = 1:length(sezTock(1,:))-2
     if k2 == Inf || k2 == -Inf %vemo, da gre za navpicno crto
         x = prva(1);
         y = n1-k1*x;
-        if (min(y1,y2)<y) && (y<max(y1,y2)) && (trenutna(1) <= max(x1,x2))
+        if k1 == k2 %ce sta vzporedni, vzamemo sredinski y
+                pomozna = sort([y1,y2,trenutna(2)]);
+                y = pomozna(2);
+        end
+        if (min(y1,y2)<=y) && (y<=max(y1,y2)) && (trenutna(1) <= max(x1,x2))    
             tocka = [x,y]';
-            indeks = i;
+            indeksTocke = i;
             stikalo = true;
-            disp('najdem presecisce x konstanta')
+            disp('najdem presecisce x konstanta 2.0')
             break
         end
     elseif k2 == 0 %vemo, da gre za vodoravno crto
         y = n2;
         x = (y-n1)/k1;
-        if (min(x1,x2)<x) && (x<max(x1,x2)) && (trenutna(2) >= max(y1,y2))
+        if k1 == k2 %ce sta vzporedni, vzamemo max x
+            x = max([x1,x2,trenutna(1)]);
+        end
+        if (min(x1,x2)<=x) && (x<=max(x1,x2)) && (trenutna(2) >= max(y1,y2))
             tocka = [x,y]';
             indeksTocke = i;
             stikalo = true;
-            disp('najdem presecisce y konstanta')
-            break;
+            disp('najdem presecisce y konstanta 2.0')
+            break
         end
     else %ce, gre za navadni dve premici
         x = (n2-n1)/(k1-k2);
         y = (k1*n2 - k2*n1)/(k1-k2);
-        if (min(x1,x2)<x) && (x<max(x1,x2))
-            if (min(y1,y2)<y) && (y<max(y1,y2))
+        if k1 == k2
+            x = max([x1,x2,trenutna(1)]);
+            y = min([y1,y2,trenutna(2)]);
+        end
+        if (min(x1,x2)<=x) && (x<=max(x1,x2))
+            if (min(y1,y2)<=y) && (y<=max(y1,y2))
                 tocka = [x,y]';
                 indeksTocke = i;
                 stikalo = true;
-                disp('najdem presecisce premic')
-            	break;
+                disp('najdem presecisce premic 2.0')
+            	break
             end
         end
     end
 end
-disp('nisem nasel presecisca')
 end
+

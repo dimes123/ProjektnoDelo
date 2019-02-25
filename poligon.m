@@ -31,22 +31,30 @@ while true
         else
             trenutna = [x,y]';
             %najprej preverimo, ce smo slucajno zadeli tocko
-            [vsebuje, indeks] = ali_vsebuje(sezTock, trenutna);
+            [vsebuje, indeksVsebuje] = ali_vsebuje(sezTock, trenutna);
+            [stikalo, tocka, indeks,k] = presek(sezTock(:, 1:stevec-1), trenutna);
             if vsebuje
-                rez = sezTock(:, indeks:stevec-1);
-                sezTock = sezTock(:,indeks:stevec-1);
-                break;
+                if ~stikalo
+                    rez = sezTock(:, indeksVsebuje:stevec-1);
+                    sezTock = sezTock(:,indeksVsebuje:stevec-1);
+                    break
+                end
             else
-                [stikalo, tocka, indeks] = presek(sezTock(:, 1:stevec-1), trenutna);
                 if stikalo
                     sezTock(1,stevec)= tocka(1);
                     sezTock(2,stevec)= tocka(2);
-                    rez = sezTock(:,indeks+1:stevec);
+                    tocka
+                    if k < 0
+                        rez = sezTock(:,indeks+2:stevec);
+                        rez = [tocka,rez];
+                    else
+                        rez = sezTock(:,indeks+1:stevec);
+                    end
                     sezTock(1,stevec)= trenutna(1);
                     sezTock(2,stevec)= trenutna(2);
                     sezTock = sezTock(:,1:stevec);
                     plot(sezTock(1,1:stevec),sezTock(2,1:stevec), '-d','MarkerSize',10, 'MarkerFaceColor','green')
-                    break;
+                    break
                 end
             end
             sezTock(1,stevec) = trenutna(1);
@@ -62,8 +70,8 @@ end
         x_rez = [rez(1,:),sezTock(1,1)];
         y_rez = [rez(2,:),sezTock(2,1)];
     else
-        x_rez = rez(1,:);
-        y_rez = rez(2,:);
+        x_rez = rez(1,:)
+        y_rez = rez(2,:)
     end
     fill(x_rez,y_rez,'b');
     plosc = ploscina(rez);

@@ -29,6 +29,9 @@ while true
             %ko imamo vec kot eno tocko, zacnemo povezovati
             if stevec > 1 
                 plot(sezTock(1,1:stevec),sezTock(2,1:stevec), '-d','MarkerSize',10, 'MarkerFaceColor','green')
+                title('Risanje polignoskih crt');
+                xlabel('x-os');
+                ylabel('y-os');
                 hold on; 
                 axis ([-10 10 -10 10]);
                 grid on;
